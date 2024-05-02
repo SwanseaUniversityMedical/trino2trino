@@ -1,0 +1,22 @@
+# docker-compose.yml
+version: "3.7"
+
+services:
+  trino-coordinator:
+    image: trinodb/trino:444
+    container_name: trino-coordinator
+    volumes:
+      - source: ./target/trino-trino-444
+        target: /usr/lib/trino/plugin/trino
+        type: bind
+      - source: ./conf/trino/catalog
+        target: /etc/trino/catalog
+        type: bind
+    ports:
+      - "8080:8080"
+
+  trino-remoter:
+    image: trinodb/trino:444
+    container_name: trino-coordinator-remoter
+    ports:
+      - "9090:8080"
