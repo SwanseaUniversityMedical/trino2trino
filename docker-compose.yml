@@ -18,5 +18,9 @@ services:
   trino-remoter:
     image: trinodb/trino:444
     container_name: trino-coordinator-remoter
+    volumes:
+      - source: ./conf/remotetrino/catalog
+        target: /etc/trino/catalog
+        type: bind
     ports:
       - "9090:8080"
